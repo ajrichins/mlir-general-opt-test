@@ -1,8 +1,8 @@
 "builtin.module"() ({
   "pdl.pattern"() ({
-    %0 = "pdl.type"() {constantType = i16} : () -> !pdl.type
+    %0 = "pdl.type"() : () -> !pdl.type
     %1 = "pdl.operation"(%0) {attributeValueNames = [], opName = "arith.constant", operand_segment_sizes = array<i32: 0, 0, 1>} : (!pdl.type) -> !pdl.operation
-    %2 = "pdl.operand"() : () -> !pdl.value
+    %2 = "pdl.operand"(%0) : (!pdl.type) -> !pdl.value
     %3 = "pdl.operation"(%0) {attributeValueNames = [], opName = "arith.constant", operand_segment_sizes = array<i32: 0, 0, 1>} : (!pdl.type) -> !pdl.operation
     %4 = "pdl.result"(%3) {index = 0 : i32} : (!pdl.operation) -> !pdl.value
     %5 = "pdl.operation"(%2, %4, %0) {attributeValueNames = [], opName = "arith.addi", operand_segment_sizes = array<i32: 2, 0, 1>} : (!pdl.value, !pdl.value, !pdl.type) -> !pdl.operation

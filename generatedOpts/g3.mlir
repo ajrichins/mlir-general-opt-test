@@ -1,6 +1,6 @@
 "builtin.module"() ({
   "pdl.pattern"() ({
-    %0 = "pdl.type"() {constantType = i64} : () -> !pdl.type
+    %0 = "pdl.type"() : () -> !pdl.type
     %1 = "pdl.operand"(%0) : (!pdl.type) -> !pdl.value
     %2 = "pdl.attribute"() {value = 0 : i64} : () -> !pdl.attribute
     %3 = "pdl.operation"(%2, %0) {attributeValueNames = ["value"], opName = "arith.constant", operand_segment_sizes = array<i32: 0, 1, 1>} : (!pdl.attribute, !pdl.type) -> !pdl.operation
