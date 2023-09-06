@@ -13,6 +13,7 @@
       %9 = "pdl.operation"(%5, %4, %0) {attributeValueNames = [], opName = "arith.addi", operand_segment_sizes = array<i32: 2, 0, 1>} : (!pdl.value, !pdl.value, !pdl.type) -> !pdl.operation
       %10 = "pdl.result"(%9) {index = 0 : i32} : (!pdl.operation) -> !pdl.value
       %11 = "pdl.operation"(%1, %10, %0) {attributeValueNames = [], opName = "arith.addi", operand_segment_sizes = array<i32: 2, 0, 1>} : (!pdl.value, !pdl.value, !pdl.type) -> !pdl.operation
+      "pdl.replace"(%6, %9) {operand_segment_sizes = array<i32: 1, 1, 0>} : (!pdl.operation, !pdl.operation) -> ()
       "pdl.replace"(%8, %11) {operand_segment_sizes = array<i32: 1, 1, 0>} : (!pdl.operation, !pdl.operation) -> ()
     }) {operand_segment_sizes = array<i32: 1, 0>} : (!pdl.operation) -> ()
   }) {benefit = 1 : i16, sym_name = "opt1"} : () -> ()

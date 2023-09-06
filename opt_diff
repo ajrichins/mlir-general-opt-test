@@ -1,5 +1,0 @@
-5,6c5
-<     %1 = "arith.addi"(%arg0, %0) : (i64, i64) -> i64
-<     "func.return"(%1) : (i64) -> ()
----
->     "func.return"(%arg0) : (i64) -> ()

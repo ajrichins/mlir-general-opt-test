@@ -18,7 +18,7 @@ ctx.register_dialect(arith.Arith)
 ctx.register_dialect(func.Func)
 ctx.register_dialect(pdl.PDL)
 
-printer = Printer(print_generic_format=True)
+printer = Printer()
 
 def parse_mlir_file(fileName):
     f = open(fileName, 'r')
