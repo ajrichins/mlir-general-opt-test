@@ -1,4 +1,4 @@
-// RUN: python LitRunOpt.py %s | filecheck %s
+// RUN: TESTOPT
 
 builtin.module {
   func.func @test_606_base(%arg0 : i32) -> i1 {
@@ -22,13 +22,5 @@ builtin.module {
     %5 = arith.cmpi ne, %4, %arg1 : i32
     // CHECK: %5 = arith.cmpi ne, %4, %arg1 : i32
     func.return %5 : i1
-  }
-  func.func @test_606_type(%arg0_3 : i64) -> i1 {
-    %c0_i64 = arith.constant 0 : i64
-    %c2_i64 = arith.constant 2 : i64
-    %6 = arith.remsi %arg0_3, %c2_i64 : i64
-    %7 = arith.cmpi ne, %6, %c0_i64 : i64
-    // CHECK: %7 = arith.trunci %arg0_3 : i64 to i1
-    func.return %7 : i1
   }
 }

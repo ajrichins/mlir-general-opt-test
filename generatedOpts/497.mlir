@@ -1,8 +1,8 @@
 pdl.pattern @opt0 : benefit(2) {
   %type0 = type
   %v1 = operand : %type0
-  %a0 = attribute = 1 : i32
-  %1 = operation "arith.constant" {"value" = %a0} -> (%type0 : !pdl.type)
+  %av1 = pdl.attribute = 1
+  %1 = pdl.operation "arith.constant" {"value" = %av1} -> (%type0 : !pdl.type)
   %r1 = result 0 of %1
   %2 = pdl.operation "arith.addi"(%v1, %r1 : !pdl.value, !pdl.value) -> (%type0 : !pdl.type)
   %r2 = result 0 of %2

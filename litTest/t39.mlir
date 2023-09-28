@@ -1,4 +1,4 @@
-// RUN: python LitRunOpt.py %s | filecheck %s
+// RUN: TESTOPT
 
 builtin.module {
   func.func @test_60_base(%arg0: i32) -> i32 {

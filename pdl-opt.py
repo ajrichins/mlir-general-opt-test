@@ -28,12 +28,21 @@ def parse_mlir_file(fileName):
     return input_module
 
 def run_opt(mlir_module, pdl_module):
-    pdl_rewrite_op = next(op for op in pdl_module.walk() if isinstance(op, pdl.RewriteOp))
     stream = StringIO()
+    pdl_rewrite_op = next(op for op in pdl_module.walk() if isinstance(op, pdl.RewriteOp))
     PatternRewriteWalker(
         PDLRewritePattern(pdl_rewrite_op, ctx, file=stream),
         apply_recursively=False,
     ).rewrite_module(mlir_module)
+    return mlir_module
+
+def run_opts(mlir_module, pdl_module):
+    stream = StringIO()
+    for pdl_rewrite_op in (op for op in pdl_module.walk() if isinstance(op, pdl.RewriteOp)):
+        PatternRewriteWalker(
+            PDLRewritePattern(pdl_rewrite_op, ctx, file=stream),
+            apply_recursively=False,
+        ).rewrite_module(mlir_module)
     return mlir_module
 
 
@@ -43,7 +52,8 @@ try:
     input_module = parse_mlir_file(argv[1])
     pdl_module = parse_mlir_file(argv[2])
     printer.print_op_with_default_format(input_module)
-    opt_module = run_opt(input_module, pdl_module)
+    #opt_module = run_opt(input_module, pdl_module)
+    opt_module = run_opts(input_module, pdl_module)
     print("\n\noptimized\n")
     printer.print_op_with_default_format(opt_module)
 

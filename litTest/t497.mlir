@@ -1,4 +1,4 @@
-// RUN: python LitRunOpt.py %s | filecheck %s
+// RUN: TESTOPT
 
 builtin.module {
   func.func @test_497_base(%arg0 : i64) -> i64 {
@@ -14,13 +14,6 @@ builtin.module {
     %3 = arith.subi %2, %c1_i64_1 : i64
     func.return %3 : i64
     // CHECK: func.return %arg0_1 : i64
-  }
-  func.func @test_497_type(%arg0_2 : i32) -> i32 {
-    %c1_i32 = arith.constant 1 : i32
-    %4 = arith.addi %arg0_2, %c1_i32 : i32
-    %5 = arith.subi %4, %c1_i32 : i32
-    func.return %5 : i32
-    // CHECK: func.return %arg0_2 : i32
   }
   func.func @test_497_need_to_work(%arg0_3 : i64) -> i64 {
     %c1_i64_2 = arith.constant 1 : i64

@@ -3,7 +3,7 @@
     %0 = "pdl.type"() : () -> !pdl.type
     %1 = "pdl.operand"(%0) : (!pdl.type) -> !pdl.value
     %2 = "pdl.operand"(%0) : (!pdl.type) -> !pdl.value
-    %3 = "pdl.attribute"() {value = 0 : i32} : () -> !pdl.attribute
+    %3 = "pdl.attribute"() {value = 0 : i64} : () -> !pdl.attribute
     %4 = "pdl.operation"(%3, %0) {attributeValueNames = ["value"], opName = "arith.constant", operand_segment_sizes = array<i32: 0, 1, 1>} : (!pdl.attribute, !pdl.type) -> !pdl.operation
     %5 = "pdl.operation"(%1, %2, %0) {attributeValueNames = [], opName = "arith.subi", operand_segment_sizes = array<i32: 2, 0, 1>} : (!pdl.value, !pdl.value, !pdl.type) -> !pdl.operation
     %6 = "pdl.result"(%4) {index = 0 : i32} : (!pdl.operation) -> !pdl.value

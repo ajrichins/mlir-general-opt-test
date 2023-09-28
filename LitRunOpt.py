@@ -1,4 +1,5 @@
 from sys import argv
+import os
 import subprocess
 from xdsl.ir import MLContext
 from xdsl.dialects import pdl, arith, func
@@ -21,12 +22,12 @@ def parse_mlir_file(fileName):
     return input_module
 
 def run_opt(mlir_module, pdl_module):
-    pdl_rewrite_op = next(op for op in pdl_module.walk() if isinstance(op, pdl.RewriteOp))
     stream = StringIO()
-    PatternRewriteWalker(
-        PDLRewritePattern(pdl_rewrite_op, ctx, file=stream),
-        apply_recursively=False,
-    ).rewrite_module(mlir_module)
+    for pdl_rewrite_op in (op for op in pdl_module.walk() if isinstance(op, pdl.RewriteOp)):
+        PatternRewriteWalker(
+            PDLRewritePattern(pdl_rewrite_op, ctx, file=stream),
+            apply_recursively=False,
+        ).rewrite_module(mlir_module)
     return mlir_module
 
 def gen_opt(optNum):
@@ -44,6 +45,8 @@ def gen_opt(optNum):
 
 assert len(argv) == 2, 'opt number to test'
 
+
+
 ctx = MLContext()
 ctx.register_dialect(Builtin)
 ctx.register_dialect(arith.Arith)
@@ -53,10 +56,11 @@ ctx.register_dialect(pdl.PDL)
 printer = Printer()
 
 try:
-    optNum = ((argv[1])[1:])[:-5] # get opt num from test filename
+    optNum = ((os.path.basename(argv[1]))[1:])[:-5] # get opt num from test filename
     gen_opt(optNum)
     input_module = parse_mlir_file(f"litTest/t{optNum}.mlir")
     pdl_module = parse_mlir_file(f"generatedOpts/g{optNum}.mlir")
+    # printer.print_op_with_default_format(pdl_module)
     opt_module = run_opt(input_module, pdl_module)
     printer.print_op_with_default_format(opt_module)
 except ParseError as e:
