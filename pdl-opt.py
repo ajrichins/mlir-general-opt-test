@@ -53,7 +53,9 @@ try:
     pdl_module = parse_mlir_file(argv[2])
     printer.print_op_with_default_format(input_module)
     #opt_module = run_opt(input_module, pdl_module)
-    opt_module = run_opts(input_module, pdl_module)
+    opt_module = run_opt(input_module, pdl_module)
+    print("\n\n opt\n")
+    printer.print_op_with_default_format(pdl_module)
     print("\n\noptimized\n")
     printer.print_op_with_default_format(opt_module)
 

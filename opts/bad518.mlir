@@ -1,13 +1,11 @@
 pdl.pattern @opt0 : benefit(100) {
   %type0 = type : i64
   %newvar2 = operand : %type0
-  %v6 = operand : %type0
+  %1 = pdl.attribute = 10 : i64
+  %0 = pdl.operation "arith.constant" {"value" = %1} -> (%type0 : !pdl.type)
+  %v6 = pdl.result 0 of %0
   %2 = pdl.operation "arith.subi"(%newvar2, %v6 : !pdl.value, !pdl.value) -> (%type0 : !pdl.type)
-  %r2 = result 0 of %2
-  %3 = pdl.operation "arith.subi"(%newvar2, %r2 : !pdl.value, !pdl.value) -> (%type0 : !pdl.type)
-  %r3 = result 0 of %3
-  %4 = pdl.operation "arith.subi"(%newvar2, %r3 : !pdl.value, !pdl.value) -> (%type0 : !pdl.type)
-  rewrite %4 {
-    replace %4 with (%v6 : !pdl.value)
+  rewrite %2 {
+    replace %2 with (%v6 : !pdl.value)
   }
 }
