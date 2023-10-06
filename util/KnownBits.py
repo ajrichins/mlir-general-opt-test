@@ -51,9 +51,9 @@ class KnownBits:
         knownOnes = 0
         knownZeros = 0
         for i in range(width):
-            if str[i] == '0':
+            if str[width-i-1] == '0':
                 knownZeros |= (1 << i)
-            elif str[i] == '1':
+            elif str[width-i-1] == '1':
                 knownOnes |= (1 << i)
         return KnownBits(BitVector(width, knownZeros), BitVector(width, knownOnes))
 
@@ -93,7 +93,7 @@ class KnownBits:
 
     def getConstant(self):
         assert self.isConstant()
-        return (self.knownOnes | self.knownZeros).bits
+        return self.knownOnes.bits
 
     """
       Get i-th bit, 0/1 returns 0/1, ? returns -1
