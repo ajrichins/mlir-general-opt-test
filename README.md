@@ -1,4 +1,4 @@
 # mlir-general-opt-test
 
-must be using version of mlir-opt pre 04fc02e583b06b846315904a55af9c273c8b20b9 
+must be using version of mlir a3f2751f782f3cdc6ba4790488ec20163a40ac37
 pdl-opt parameters are testfile first and pdl rewrite second
