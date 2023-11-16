@@ -59,7 +59,7 @@ try:
     optNum = ((os.path.basename(argv[1]))[1:])[:-5] # get opt num from test filename
     gen_opt(optNum)
     input_module = parse_mlir_file(f"litTest/t{optNum}.mlir")
-    pdl_module = parse_mlir_file(f"generatedOpts/g{optNum}.mlir")
+    pdl_module = parse_mlir_file(f"generatedOpts/{optNum}.mlir") #stop using generic pdl, it's better
     # printer.print_op_with_default_format(pdl_module)
     opt_module = run_opt(input_module, pdl_module)
     printer.print_op_with_default_format(opt_module)
